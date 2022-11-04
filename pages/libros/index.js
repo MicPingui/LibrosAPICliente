@@ -1,13 +1,14 @@
 import Link from 'next/link'
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/books`)
     const data = await res.json()
     
     return {
         props: {
             books: data
-        }
+        },
+        //revalidate: 10 -> una opcion para que cada 10 segundos realice la peticion cuando sea getStaticProps()
     }
 }
 
